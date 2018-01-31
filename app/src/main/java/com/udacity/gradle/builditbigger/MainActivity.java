@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements JokeView {
 
     public void tellJoke(View view) {
         // Get joke from GCE server
-        new GetJokeAsyncTask().execute(this);
+//        new GetJokeAsyncTask().execute(this);
+        new GetJokeAsyncTask().execute("Nome");
     }
 
     @Override
