@@ -2,9 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.example.jokeprovider.JokeProvider;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -19,16 +17,14 @@ import java.io.IOException;
 
 public class GetJokeAsyncTask extends AsyncTask<JokeView, Void, String> {
 
-    private Context context;
-    JokeView mJokeView;
+    private JokeView mJokeView;
 
     private static MyApi myApiService = null;
 
     @Override
     protected String doInBackground(JokeView... params) {
         mJokeView = params[0];
-//        JokeProvider jokeProvider = new JokeProvider();
-//        return jokeProvider.getJoke();
+
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -48,7 +44,7 @@ public class GetJokeAsyncTask extends AsyncTask<JokeView, Void, String> {
         }
 
         try {
-            return myApiService.sayHi("Leonardo").execute().getData();
+            return myApiService.showJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
